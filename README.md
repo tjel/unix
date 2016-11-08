@@ -32,8 +32,13 @@ cat /etc/hosts
 ```
 
 b) konfiguracja interfejsow (`static`, `dhcp`), opcje `auto`, `allow-hotplug`
+```
+man 5 interfaces
+```
+
   - statyczny adres IP - ustawienia czasowe
 ```
+/sbin/ifconfig
 ifconfig <interface> options | <address>
 ```
 Przyklad:
@@ -60,8 +65,7 @@ cat /etc/network/interfaces
 
 - dhcp
 ```
-dhclient eth1
-ifconfig eth1 dhcp start
+dhclient eth0
 ```
 ```
 cat /etc/network/interfaces
@@ -127,7 +131,7 @@ cat /etc/network/interfaces
   network 192.168.56.0
   broadcast 192.168.56.255
 ```
-f) DNS
+f) dane DNS
 ```
 cat /etc/hosts
   192.168.56.101 debian1
@@ -137,9 +141,13 @@ cat /etc/hosts
 
 g) konfiguracja mostu (bridge), agregacja laczy (link aggregation)
 
-h) DNS
+h) uzywane nazwy serwerow
 ```
 cat /etc/resolv.conf
+```
+i) odpytanie serwera DNS
+```
+nslookup google.com
 ```
 
 ---
