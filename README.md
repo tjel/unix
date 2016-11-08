@@ -31,7 +31,7 @@ passwd -l <user>
 f) dodawanie uzytkownikow i grup; adduser template `/etc/skel/`
 ```
 adduser <user>
-addgroup, delgroup, passwd -g <group>
+{addgroup|delgroup|passwd} -g <group>
 adduser <user> <group>
 ```
 
