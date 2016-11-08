@@ -1,6 +1,6 @@
 # UNIX
 ---
-2016.11.02
+**2016.11.02**
 - dodawanie uzytkownikow, grup, uprawnien 
 - prawa dostepu plikow
 - ustawienia globalne, ustawienia lokalne, locale
