@@ -11,18 +11,8 @@ locale
 
 b) uzytkownicy i grupy, hasla, **/etc/passwd**, **/etc/group**, **/etc/shadow**
 ```bash
-nano /etc/passwd
+# nano /etc/passwd
 ```
-```super_user
-adduser
-```
-```command
-adduser
-```
-nginx
-[label /etc/nginx/sites-available/default]
-server {
-    listen 80 default_server;
-    . . .
-}
+```bash
+# adduser
 ```
