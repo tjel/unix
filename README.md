@@ -9,10 +9,13 @@ a) sprawdzenie locali
 locale
 ```
 
-b) uzytkownicy i grupy, hasla, **/etc/passwd**, **/etc/group**, **/etc/shadow*
+b) uzytkownicy i grupy, hasla, **/etc/passwd**, **/etc/group**, **/etc/shadow**
 ```bash
 nano /etc/passwd
 ```
-```bash
+```super_user
+adduser
+```
+```command
 adduser
 ```
