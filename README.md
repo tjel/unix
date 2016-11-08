@@ -30,16 +30,32 @@ b) konfiguracja interfejsow (`static`, `dhcp`), opcje `auto`, `allow-hotplug`
   - statyczny adres IP - ustawienia czasowe
 ```
 ifconfig <interface> options | <address>
+```
+Przyklad:
+```
 ifconfig eth0 192.168.1.200/24 up
 route add default gw 192.168.1.1
 ```
   - statyczny adres IP - ustawienia permanentne
 ```
 cat /etc/network/interfaces
-  auto eth0
-  iface eth0 inet {dhcp|static}
-sudo ifup -a
+  # The loopback network interface
+  auto lo eth0
+  iface lo inet loopback
+
+  # The primary network interface
+  iface eth0 inet static
+  address 192.168.10.33
+  netmask 255.255.255.0
+  broadcast 192.168.10.255
+  network 192.168.10.0
+  gateway 192.168.10.254 
+  dns-nameservers 192.168.10.254
 ```
+
+sudo ifup -a
+
+
 - dhcp
 ```
 dhclient eth1
@@ -51,19 +67,19 @@ auto eth0
 iface eth0 inet dhcp
 ```
 
-c) tablice routingu, gateway
-```
-ip route
-route [-n]
-netstat [-nr]
-```
-
-d) uruchamianie interfejsow
+c) uruchamianie interfejsow
 ```
 /etc/init.d/networking {start|stop}
 service networking {start|stop}
 ifup [-a]
 ifdown
+```
+
+d) tablice routingu, gateway
+```
+ip route
+route [-n]
+netstat [-nr]
 ```
 
 e) siec w trybie NAT ('Basic' NAT network), 
