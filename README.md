@@ -21,17 +21,19 @@ scp unixman@10.0.0.0:/home/unixman/VMs/debian-bare.ova
 a) podstawowe polecenia; nowy schemat numeracji interfejsow np. `enp0s0` 
 ```
 ifconfig [-a]
+ifconfig eth1 192.168.14.1/24
 ip addr show
 ping host
 hostname -I (?)
 ```
 b) konfiguracja interfejsow (`static`, `dhcp`), opcje `auto`, `allow-hotplug`
-  - statyczny adres IP
+  - statyczny adres IP - ustawienia czasowe
 ```
 ifconfig <interface> options | <address>
 ifconfig eth0 192.168.1.200/24 up
 route add default gw 192.168.1.1
 ```
+  - statyczny adres IP - ustawienia permanentne
 ```
 cat /etc/network/interfaces
   auto eth0
@@ -40,19 +42,19 @@ sudo ifup -a
 ```
 - dhcp
 ```
-dhclient (?)
+dhclient eth1
+ifconfig eth1 dhcp start
+```
+```
 cat /etc/network/interfaces
 auto eth0
 iface eth0 inet dhcp
 ```
 
-
-
-
-
 c) tablice routingu, gateway
 ```
 ip route
+route [-n]
 netstat [-nr]
 ```
 
@@ -78,7 +80,6 @@ g) siec izolowana (`static`, `dhcp`)
 ```
 enp0s1 10.1.1.11-10.1.1.13
 ```
-
 
 h) siec host-only (`static`, `dhcp`)
 
