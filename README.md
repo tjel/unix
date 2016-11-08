@@ -6,12 +6,12 @@
 
 - maszyny wirtualne
 ```
-scp unixman@155.158.206.23:/home/unixman/VMs/ubuntu-bare.ova
-scp unixman@155.158.206.23:/home/unixman/VMs/debian-bare.ova
+scp unixman@10.0.0.0:/home/unixman/VMs/ubuntu-bare.ova
+scp unixman@10.0.0.0:/home/unixman/VMs/debian-bare.ova
 ```
 - zarzadzanie ustawieniami sieciowymi
 - konfiguracja sieci w VirtualBoxie
-  - NAT
+  - NAT, port forwarding
   - mostek
   - siec izolowana
   - siec host-only
@@ -33,6 +33,7 @@ c) tablice routingu, gateway
 ip route
 netstat [-nr]
 ```
+
 d) uruchamianie interfejsow
 ```
 /etc/init.d/networking {start|stop}
@@ -41,7 +42,12 @@ ifup [-a]
 ifdown
 ```
 
-e) konfiguracja mostu
+e) polaczenie z maszyna wirtualna w trybie NAT, przekierowanie portow
+```
+ssh unixman@127.0.0.1 -p 2281
+```
+
+f) konfiguracja mostu
 
 ---
 **2016.11.02**
