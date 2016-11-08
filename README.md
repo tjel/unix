@@ -131,7 +131,7 @@ cat /etc/network/interfaces
   network 192.168.56.0
   broadcast 192.168.56.255
 ```
-f) dane DNS
+f) statyczne mapowanie nazw hostow i adresow IP
 ```
 cat /etc/hosts
   192.168.56.101 debian1
@@ -141,7 +141,7 @@ cat /etc/hosts
 
 g) konfiguracja mostu (bridge), agregacja laczy (link aggregation)
 
-h) uzywane nazwy serwerow
+h) uzywane serwery DNS
 ```
 cat /etc/resolv.conf
 ```
