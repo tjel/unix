@@ -26,6 +26,12 @@ ip addr show
 ping host
 hostname -I (?)
 ```
+Identyfikacja hosta/hostow przez jadro
+```
+cat /etc/sys/kernel/hostname
+cat /etc/hosts
+```
+
 b) konfiguracja interfejsow (`static`, `dhcp`), opcje `auto`, `allow-hotplug`
   - statyczny adres IP - ustawienia czasowe
 ```
@@ -84,6 +90,10 @@ e) siec w trybie NAT ('Basic' NAT network),
   - GW `10.0.2.2`
   - DNS server `10.0.2.3`
   - polaczenie hosta z maszyna wirtualna poprzez przekierowanie portow
+```  
+VM > Ustawienia > Siec > Zaawansowane > Przekierowanie portow
+Nazwa:SSH Protokol:TCP IP hosta: Port hosta: 2281 IP goscia: Port goscia: 22
+```
 ```
 ssh unixman@127.0.0.1 -p 2281
 ```
@@ -126,7 +136,12 @@ cat /etc/hosts
   192.168.56.102 ubuntu2
 ```
 
-g) konfiguracja mostu
+g) konfiguracja mostu (bridge), agregacja laczy (link aggregation)
+
+h) DNS
+```
+cat /etc/resolv.conf
+```
 
 ---
 **2016.11.02**
@@ -143,9 +158,9 @@ b) uzytkownicy i grupy, hasla, `/etc/passwd`, `/etc/group`, `/etc/shadow`
 
 c) wazne polecenia zwiazane z zarzadzaniem haslami
 
-  - aaa
+  - ustawienia hasla, termin waznosci
 ```
-passwd
+passwd [options] [<user>]
 chage -l <user>
 ```
   - wymuszenie wygasniecia hasla i zmiany przy zalogowaniu (expiration)
