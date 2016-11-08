@@ -9,9 +9,9 @@ a) sprawdzenie locali
 locale
 ```
 
-b) uzytkownicy i grupy, hasla
+b) uzytkownicy i grupy, hasla, **/etc/passwd**, **/etc/group**, **/etc/shadow*
 ```bash
-nano /etc/passwd, /etc/group, /etc/shadow
+nano /etc/passwd
 ```
 ```bash
 adduser
