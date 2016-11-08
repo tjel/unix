@@ -53,9 +53,6 @@ cat /etc/network/interfaces
   dns-nameservers 192.168.10.254
 ```
 
-sudo ifup -a
-
-
 - dhcp
 ```
 dhclient eth1
@@ -83,18 +80,21 @@ netstat [-nr]
 ```
 
 e) siec w trybie NAT ('Basic' NAT network), 
-  - VNIC `enps0s0 10.0.2.15`
+  - VNIC `enp0s0 10.0.2.15`
   - GW `10.0.2.2`
   - DNS server `10.0.2.3`
   - polaczenie hosta z maszyna wirtualna poprzez przekierowanie portow
 ```
 ssh unixman@127.0.0.1 -p 2281
 ```
-f) siec w trybie mostu
+f) siec w trybie mostu (`static`, `dhcp`)
+```
+enp0s8 155.158.131.X
+```
 
 g) siec izolowana (`static`, `dhcp`)
 ```
-enp0s1 10.1.1.11-10.1.1.13
+enp0s9 10.1.1.11-10.1.1.13
 ```
 
 h) siec host-only (`static`, `dhcp`)
