@@ -19,3 +19,10 @@ adduser
 ```command
 adduser
 ```
+nginx
+[label /etc/nginx/sites-available/default]
+server {
+    listen 80 default_server;
+    . . .
+}
+```
