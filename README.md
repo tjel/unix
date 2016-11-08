@@ -20,15 +20,14 @@ scp unixman@10.0.0.0:/home/unixman/VMs/debian-bare.ova
 
 a) podstawowe polecenia; nowy schemat numeracji interfejsow np. `enp0s0` 
 ```
-ifconfig [-a]
-ifconfig eth1 192.168.14.1/24
+hostname -I
+ifconfig [-a] [<interface>]
 ip addr show
-ping host
-hostname -I (?)
+ping <IP>
 ```
 Identyfikacja hosta/hostow przez jadro
 ```
-cat /etc/sys/kernel/hostname
+cat /proc/sys/kernel/hostname
 cat /etc/hosts
 ```
 
@@ -72,8 +71,8 @@ iface eth0 inet dhcp
 
 c) uruchamianie interfejsow
 ```
-/etc/init.d/networking {start|stop}
-service networking {start|stop}
+/etc/init.d/networking {restart|start|stop}
+service networking {restart|start|stop}
 ifup [-a]
 ifdown
 ```
