@@ -6,8 +6,9 @@
 
 - maszyny wirtualne (**Reinitialize MAC addresses!**)
 ```
-scp unixman@10.0.0.0:/home/unixman/VMs/ubuntu-bare.ova
-scp unixman@10.0.0.0:/home/unixman/VMs/debian-bare.ova
+mkdir ~/VMs
+scp unixman@10.0.0.0:/home/unixman/VMs/ubuntu-bare.ova ~/VMs/
+scp unixman@10.0.0.0:/home/unixman/VMs/debian-bare.ova ~/VMs/
 ```
 
 - zarzadzanie ustawieniami sieciowymi
