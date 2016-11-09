@@ -115,7 +115,7 @@ h) siec host-only (`static`, `dhcp`)
 
 - VirtualBox host VNIC: vboxnet0 192.168.56.1
 - DHCP server: 192.168.56.100
-- IPrange: 192.168.56.101-103 # VM1-3
+- IP range: 192.168.56.101-103 # VM1-3
 
 Statyczna konfiguracja VM1:
 ```
