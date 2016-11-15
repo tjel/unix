@@ -5,11 +5,41 @@
 **2016.11.16**
 
 - sprawdzic topologie sieci NAT, sieci wewnetrznej oraz sieci host-only korzystajac z `nmap`, `traceroute`, `nslookup`
-- ustalic w kazdej sieci adres bramy domyslnej, serwera DHCP oraz serwera DNS
+- ustalic w kazdej sieci adres bramy domyslnej (jesli istnieje), serwera DHCP oraz serwera DNS
 ```bash
-cat /var/lib/dhcp3/dhclient.leases
-tcpdump -i <interface> port 67 or port 68
+cat /var/lib/dhcp/dhclient.eth0.leases
+nmap --script broadcast-dhcp-discover -e <interface>
 ```
+- DNAT, SNAT, przekierowanie portow
+```bash
+cat /proc/sys/net/ipv4/conf/default/forwarding
+echo 1 > /proc/sys/net/ipv4/conf/default/forwarding
+```
+```bash
+cat /etc/sysctl.conf
+net.ipv4.conf.default.forwarding = 1
+net.ipv4.conf.default.rp_filter = 1
+net.ipv4.tcp_syncookies = 1
+```
+- ksztaltowanie ruchu sieciowego, wondershaper
+
+```bash
+wget -O /dev/null http://speedtest.dal01.softlayer.com/downloads/test100.zip
+```
+```bash
+sudo apt-get install wondershaper
+```
+```bash
+cat /etc/network/interfaces
+  allow-hotplug enp0s3
+  iface enp0s3 inet dhcp
+  up /sbin/wondershaper enp0s3 500 100
+  down /sbin/wondershaper enp0s3 remove
+reboot
+wget -O /dev/null http://speedtest.dal01.softlayer.com/downloads/test100.zip
+```
+
+
 ---
 **2016.11.09**
 
