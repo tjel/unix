@@ -63,7 +63,84 @@ mount -n -o remount,rw /
 passwd
 reboot -f
 ```
-
+- instalacja serwera LAMP/LEMP
+  - nginx
+```bash
+apt-get install nginx
+ps -ax | grep nginx
+netstat -tupan
+http://192.168.56.102
+cat /etc/nginx/nginx.conf
+```
+  - baza danych MySQL
+```bash
+sudo apt-get install mysql-server
+sudo mysql_secure_installation
+```
+  - PHP
+```bash
+sudo apt-get install php-fpm php-mysql
+nano /etc/php/7.0/fpm/php.ini
+  cgi.fix_pathinfo=0
+systemctl restart php7.0-fpm  
+```
+  - powiazanie `nginx` z PHP
+```bash
+cat /etc/nginx/sites-available/default
+  server {
+      listen 80 default_server;
+      listen [::]:80 default_server;
+  
+      root /var/www/html;
+      index index.html index.htm index.nginx-debian.html;
+  
+      server_name _;
+  
+      location / {
+          try_files $uri $uri/ =404;
+      }
+  }
+```
+```bash
+cat /etc/nginx/sites-available/default
+  server {
+      listen 80 default_server;
+      listen [::]:80 default_server;
+  
+      root /var/www/html;
+      index index.php index.html index.htm index.nginx-debian.html;
+  
+      server_name server_domain_or_IP;
+  
+      location / {
+          try_files $uri $uri/ =404;
+      }
+  
+      location ~ \.php$ {
+          include snippets/fastcgi-php.conf;
+          fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+      }
+  
+      location ~ /\.ht {
+          deny all;
+      }
+  }
+```
+```bash
+nginx -t
+```
+```bash
+systemctl reload nginx
+```
+   - utworzenie pliku testowego PHP
+```bash
+cat /var/www/html/info.php
+  <?php
+  phpinfo();
+```
+```bash
+http://192.168.56.102/info.php
+```
 ---
 **2016.11.09**
 
