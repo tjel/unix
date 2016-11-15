@@ -44,6 +44,26 @@ wget -O /dev/null http://speedtest.dal01.softlayer.com/downloads/test100.zip
   - nmap -A 10.0.2.0/24 > nmap-10.txt
   - nmap -A 192.168.56.0/24 > nmap-192.txt
 
+- konfiguracja GRUBa
+```bash
+cat /etc/default/grub
+  GRUB_TIMEOUT=10
+update-grub
+reboot
+```
+```bash
+cat /boot/grub/grub.cfg
+```
+
+- single-user mode
+```
+linux /boot/vmlinuz-4.4.0-45-generic root=UUOD=6d011cfd-267e-41b8-91d6-bcd4b35990b2 ro init=/bin/bash
+Ctrl+x
+mount -n -o remount,rw /
+passwd
+reboot -f
+```
+
 ---
 **2016.11.09**
 
