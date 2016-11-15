@@ -38,8 +38,10 @@ cat /etc/network/interfaces
 reboot
 wget -O /dev/null http://speedtest.dal01.softlayer.com/downloads/test100.zip
 ```
-
-
+- diagnostyka sieci
+   - netstat [-t -u -p -a -n -c]
+   - nmap [-A ] localhost
+   - nmap -A 10.0.2.0/24
 ---
 **2016.11.09**
 
