@@ -2,6 +2,15 @@
 [1] Hertzog&Mas, [The Debian Administrator's Handbook](https://debian-handbook.info/browse/stable/)
 
 ---
+**2016.11.16**
+
+- sprawdzic topologie sieci NAT, sieci wewnetrznej oraz sieci host-only korzystajac z `nmap`, `traceroute`, `nslookup`
+- ustalic w kazdej sieci adres bramy domyslnej, serwera DHCP oraz serwera DNS
+```bash
+cat /var/lib/dhcp3/dhclient.leases
+tcpdump -i <interface> port 67 or port 68
+```
+---
 **2016.11.09**
 
 - maszyny wirtualne (**Reinitialize MAC addresses!**)
@@ -132,7 +141,7 @@ cat /etc/network/interfaces
   network 192.168.56.0
   broadcast 192.168.56.255
 ```
-f) statyczne mapowanie nazw hostow i adresow IP
+i) statyczne mapowanie nazw hostow i adresow IP
 ```
 cat /etc/hosts
   192.168.56.101 debian1
@@ -140,13 +149,13 @@ cat /etc/hosts
   192.168.56.102 ubuntu2
 ```
 
-g) konfiguracja mostu (bridge), agregacja laczy (link aggregation)
+j)* konfiguracja mostu (bridge), agregacja laczy (link aggregation)
 
-h) uzywane serwery DNS
+k) uzywane serwery DNS
 ```
 cat /etc/resolv.conf
 ```
-i) odpytanie serwera DNS
+l) odpytanie serwera DNS
 ```
 nslookup google.com
 ```
