@@ -132,7 +132,7 @@ nginx -t
 ```bash
 systemctl reload nginx
 ```
-   - utworzenie pliku testowego PHP
+  - utworzenie pliku testowego PHP
 ```bash
 cat /var/www/html/info.php
   <?php
