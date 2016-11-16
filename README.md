@@ -66,18 +66,18 @@ reboot -f
 - instalacja serwera LAMP/LEMP
 
   - nginx
-```bash
-apt-get install nginx
-ps -ax | grep nginx
-netstat -tupan
-http://192.168.56.102
-cat /etc/nginx/nginx.conf
-```
+  ```bash
+  apt-get install nginx
+  ps -ax | grep nginx
+  netstat -tupan
+  http://192.168.56.102
+  cat /etc/nginx/nginx.conf
+  ```
   - baza danych MySQL
-```bash
-sudo apt-get install mysql-server
-sudo mysql_secure_installation
-```
+  ```bash
+  sudo apt-get install mysql-server
+  sudo mysql_secure_installation
+  ```
   - PHP
 ```bash
 sudo apt-get install php-fpm php-mysql
