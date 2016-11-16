@@ -64,6 +64,7 @@ passwd
 reboot -f
 ```
 - instalacja serwera LAMP/LEMP
+
   - nginx
 ```bash
 apt-get install nginx
