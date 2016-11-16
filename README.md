@@ -142,6 +142,25 @@ reboot -f
   ```bash
   http://192.168.56.102/info.php
   ```
+
+- resetowanie klucza ssh
+```bash
+ssh-keygen -R <host>
+ssh <host>
+```
+
+- wlaczenie logowania przez ssh na konto root
+
+```bash
+cat /etc/ssh/sshd_config
+  PermitRootLogin yes
+/etc/init.d/ssh restart  
+```
+Inna mozliwosc:
+```bash
+sudo sed -i 's/prohibit-password/yes/' /etc/ssh/sshd_config && systemctl restart sshd
+```
+
 ---
 **2016.11.09**
 
