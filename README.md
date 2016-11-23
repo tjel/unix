@@ -2,6 +2,49 @@
 [1] Hertzog&Mas, [The Debian Administrator's Handbook](https://debian-handbook.info/browse/stable/)
 
 ---
+**2016.11.23**
+
+- sekwencja startowa systemu
+  - `dmesg`: bootstrap, init, udev, syslogd
+  - demony
+
+- init, `/sbin/init`
+  - sysvinit, `/etc/inittab`, `/etc/init.d`, `/etc/rc.d`
+  - Upstart,  `/etc/init/*.conf`
+  - systemd, `/etc/systemd`, `/usr/lib/systemd`, jednostki (units): uslug (service), monotowania (mount), celu (target)
+
+- poziomy pracy
+  - `runlevel`, `who -r`
+  - [Debian docs](https://www.debian.org/doc/manuals/debian-reference/ch03.en.html)
+  - runlevels `0-9`, `/etc/inittab`, `/etc/rc.d`,
+  - zmiana poziomu pracy `telint`
+  - `default.target`
+
+
+- zarzadzanie uslugami w systemach inicjalizowanych przez `systemd`
+  - `systemctl`
+  - [RHEL7 Chapter 9](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/pdf/System_Administrators_Guide/Red_Hat_Enterprise_Linux-7-System_Administrators_Guide-en-US.pdf)
+
+- procesy, identyfikator procesu (PID), PPID
+```bash
+ps [a] [ax] [aux] [auxw] | less
+```
+- STAT, RSS, VSZ
+```bash
+man ps
+```
+- monitorowanie procesow, priorytety, PR, NI
+```bash
+top
+nice
+ls /proc
+cat /proc/cpuinfo
+cat /proc/devices
+cat /proc/meminfo
+cat /proc/partitions
+```
+
+---
 **2016.11.16**
 
 - sprawdzic topologie sieci NAT, sieci wewnetrznej oraz sieci host-only korzystajac z `nmap`, `traceroute`, `nslookup`
