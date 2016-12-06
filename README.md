@@ -27,14 +27,12 @@ IPV6=yes
  - firewall nieaktywny
  ```bash
  sudo ufw status verbose
- Output:
  Status: inactive
  ```
  
  - firewall aktywny, dozwolone polaczenie jedynie na port 22 z dowolnej lokalizacji
  ```bash
  sudo ufw status verbose
- Output:
  Status: active
  Logging: on (low)
  Default: deny (incoming), allow (outgoing), disabled (routed)
