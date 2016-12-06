@@ -20,6 +20,8 @@ sudo nano /etc/default/ufw
 ...
 IPV6=yes
 ...
+sudo ufw disable
+sudo ufw enable
 ```
 
 - sprawdzenie statusu zapory
@@ -52,7 +54,7 @@ sudo ufw default allow outgoing
 - zezwolenie na polaczenie przez SSH na porcie 22
 
 ```bash
-sudo ufw allow (ssh|22)
+sudo ufw allow (ssh|22/tcp)
 ```
 
 - uaktywnienie i wylaczenie zapory
@@ -129,7 +131,9 @@ sudo ufw deny from 15.15.15.0/24
  - poprzez usuniecie calego wpisu
  
  ```bash
- sudo ufw delete allow (http|80)
+ sudo ufw delete allow ssh
+ sudo ufw delete allow (http|80/tcp)
+ sudo ufw delete allow 1000:2000/tcp
  ```
 
 - resetowanie ustawien zapory
