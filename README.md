@@ -26,7 +26,7 @@ IPV6=yes
 
  - firewall nieaktywny
  ```bash
- sudo ufw status [verbose]
+ sudo ufw status verbose
  Output:
  Status: inactive
  ```
@@ -114,25 +114,26 @@ sudo ufw deny from 15.15.15.0/24
 - usuwanie regul zapory sieciowej
 
  - poprzez odwolanie do numery reguly
+ ```bash
+ sudo ufw status numbered
+ Numbered Output:
+ Status: active
+ 
+      To                         Action      From
+      --                         ------      ----
+ [ 1] 22                         ALLOW IN    15.15.15.0/24
+ [ 2] 80                         ALLOW IN    Anywhere
+ ```
+ ```bash
+ sudo ufw delete 2
+ ```
 
-```bash
-sudo ufw status numbered
-Numbered Output:
-Status: active
-
-     To                         Action      From
-     --                         ------      ----
-[ 1] 22                         ALLOW IN    15.15.15.0/24
-[ 2] 80                         ALLOW IN    Anywhere
-```
-```bash
-sudo ufw delete 2
-```
  - poprzez usuniecie calego wpisu
  
  ```bash
  sudo ufw delete allow (http|80)
  ```
+
 - resetowanie ustawien zapory
 
 ```bash
