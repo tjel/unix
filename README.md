@@ -1,6 +1,149 @@
 # UNIX
 [1] Hertzog&Mas, [The Debian Administrator's Handbook](https://debian-handbook.info/browse/stable/)
 
+
+---
+**2016.12.07**
+
+- zapory sieciowe (firewall)
+
+- instalacja ufw (Uncomplicated Firewall)
+
+```bash
+sudo apt-get install ufw
+```
+
+- wlaczenie obslugi IPv6
+
+```bash
+sudo nano /etc/default/ufw 
+...
+IPV6=yes
+...
+```
+
+- sprawdzenie statusu zapory
+
+ - firewall nieaktywny
+
+```bash
+sudo ufw status [verbose]
+Output:
+Status: inactive
+```
+ - firewall aktywny, dozwolone polaczenie jedynie na port 22 z dowolnej lokalizacji 
+
+```bash
+sudo ufw status verbose
+Output:
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW IN    Anywhere
+```
+
+- domyslne ustawienia zapory
+
+```bash
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+```
+- zezwolenie na polaczenie przez SSH na porcie 22
+
+```bash
+sudo ufw allow (ssh|22)
+```
+
+- uaktywnienie i wylaczenie zapory
+
+```bash
+sudo ufw (enable|disable)
+```
+- zezwolenie na polaczenia HTTP, HTTPS, FTP, rsync, MySQL, PostgreSQL,...
+
+```bash
+cat /etc/services
+```
+
+```bash
+sudo ufw allow (http|80)
+sudo ufw allow (https|443)
+sudo ufw allow (ftp|21/tcp)
+sudo ufw allow from 15.15.15.0/24 to any port 873
+sudo ufw allow from 15.15.15.0/24 to any port 3306
+sudo ufw allow from 15.15.15.0/24 to any port 5432
+```
+
+```bash
+sudo ufw allow proto tcp from any to any port 80,443
+```
+
+- zezwolenie na polaczenie na zakresie portow 6000-6007
+
+```bash
+sudo ufw allow 6000:6007/tcp
+sudo ufw allow 6000:6007/udp
+```
+
+- zezwolenie na polaczenie z ustalonych adresow IP
+
+```bash
+sudo ufw allow from 15.15.15.51
+sudo ufw allow from 15.15.15.51 to any port 22
+sudo ufw allow from 15.15.15.0/24
+sudo ufw allow from 15.15.15.0/24 to any port 22
+```
+
+- zezwolenie na polaczenie poprzez wybrany interfejs sieciowy
+
+```bash
+sudo ufw allow in on eth0 to any port 80
+sudo ufw allow in on eth1 to any port 3306
+```
+
+- blokowanie polaczen w przypadku domyslnego ustawienia zapory w trybie `default allow incoming`
+
+```
+sudo ufw deny http
+sudo ufw deny from 15.15.15.51
+sudo ufw deny from 15.15.15.0/24
+```
+- usuwanie regul zapory sieciowej
+
+ - poprzez odwolanie do numery reguly
+
+```bash
+sudo ufw status numbered
+Numbered Output:
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] 22                         ALLOW IN    15.15.15.0/24
+[ 2] 80                         ALLOW IN    Anywhere
+```
+```bash
+sudo ufw delete 2
+```
+ - poprzez usuniecie calego wpisu
+ 
+ ```bash
+ sudo ufw delete allow (http|80)
+ ```
+- resetowanie ustawien zapory
+
+```bash
+sudo ufw reset
+```
+
+
+
+- snort
+
 ---
 **2016.11.23**
 
