@@ -25,14 +25,13 @@ IPV6=yes
 - sprawdzenie statusu zapory
 
  - firewall nieaktywny
-
 ```bash
 sudo ufw status [verbose]
 Output:
 Status: inactive
 ```
- - firewall aktywny, dozwolone polaczenie jedynie na port 22 z dowolnej lokalizacji 
 
+ - firewall aktywny, dozwolone polaczenie jedynie na port 22 z dowolnej lokalizacji
 ```bash
 sudo ufw status verbose
 Output:
