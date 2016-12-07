@@ -265,44 +265,44 @@ sudo apparmor_status
  ```
  
  - edycja profilu `nginx`
- 
+  
   - dodanie `#include <abstractions/apache2-common>`
   - dodanie `capability setgid`
   - dodanie `capability setuid`
   - dodanie znaku `*` do `/data/www/safe/`
   - dodanie lini `deny /data/www/unsafe/* r,`
   - dodanie znaku `w` do `/var/log/nginx/error.log`
- 
- ```bash
- sudo nano /etc/apparmor.d/usr.sbin.nginx
- #include <tunables/global>
-
- /usr/sbin/nginx {
-   #include <abstractions/apache2-common>
-   #include <abstractions/base>
-   #include <abstractions/nis>
- 
-   capability dac_override,
-   capability dac_read_search,
-   capability net_bind_service,
-   capability setgid,
-   capability setuid,
- 
-   /data/www/safe/* r,
-   deny /data/www/unsafe/* r,
-   /etc/group r,
-   /etc/nginx/conf.d/ r,
-   /etc/nginx/mime.types r,
-   /etc/nginx/nginx.conf r,
-   /etc/nsswitch.conf r,
-   /etc/passwd r,
-   /etc/ssl/openssl.cnf r,
-   /run/nginx.pid rw,
-   /usr/sbin/nginx mr,
-   /var/log/nginx/access.log w,
-   /var/log/nginx/error.log w,
- } 
- ```
+  
+  ```bash
+  sudo nano /etc/apparmor.d/usr.sbin.nginx
+  #include <tunables/global>
+  
+  /usr/sbin/nginx {
+    #include <abstractions/apache2-common>
+    #include <abstractions/base>
+    #include <abstractions/nis>
+    
+    capability dac_override,
+    capability dac_read_search,
+    capability net_bind_service,
+    capability setgid,
+    capability setuid,
+    
+    /data/www/safe/* r,
+    deny /data/www/unsafe/* r,
+    /etc/group r,
+    /etc/nginx/conf.d/ r,
+    /etc/nginx/mime.types r,
+    /etc/nginx/nginx.conf r,
+    /etc/nsswitch.conf r,
+    /etc/passwd r,
+    /etc/ssl/openssl.cnf r,
+    /run/nginx.pid rw,
+    /usr/sbin/nginx mr,
+    /var/log/nginx/access.log w,
+    /var/log/nginx/error.log w,
+  }
+  ```
  
  - przelaczenie `AppArmor` w tryb `enforce`
  ```bash
