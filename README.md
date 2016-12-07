@@ -5,6 +5,21 @@
 ---
 **2016.12.07**
 
+- `/etc/sudoers`, `/var/log/auth.log`
+
+```bash
+man sudoers
+sudo visudo
+root ALL=(ALL) ALL
+unixman ALL=(ALL) ALL
+%admin ALL=(ALL) ALL
+unixman2 ubuntu = (root, unixman) /bin/ls, /bin/kill
+```
+
+```bash
+sudo -u unixman /bin/ls /etc
+```
+
 - zapory sieciowe (firewall)
 
 - instalacja ufw (Uncomplicated Firewall)
@@ -142,10 +157,173 @@ sudo ufw deny from 15.15.15.0/24
 sudo ufw reset
 ```
 
+- przypisanie regul programom za pomoca `AppArmor`
 
+ - pliki konfiguracyjne `AppArmor` `/etc/apparmor/`
+ - reguly `AppArmor` `/etc/apparmor.d/`
+ - skrypt init `Apparmor` `/etc/init.d/apparmor`
+ - dziennik zdarzen `/etc/log/apparmor/`
+ - systemowy dziennik zdarzen `/var/log/syslog`
 
-- snort
+- instalacja dodatkowych profilow i narzedzi `AppArmor`
 
+```bash
+sudo apt-get install apparmor-profiles apparmor-utils
+sudo apparmor_status
+```
+
+- tryby `enforce` i `complain`
+
+- konfiguracja `AppArmor` na przykladzie `nginx`
+ 
+ - utworzenie testowych plikow `index.html` dla `nginx`
+
+ ```bash
+ sudo mkdir -p /data/www/safe
+ sudo mkdir -p /data/www/unsafe
+ ```
+ 
+ ```bash
+ sudo nano /data/www/safe/index.html
+ <html>
+     <b>Hello! Accessing this file is allowed.</b>
+ </html>
+ ```
+
+ ```bash
+ sudo nano /data/www/unsafe/index.html
+ <html>
+     <b>Hello! Accessing this file is NOT allowed.</b>
+ </html>
+ ```
+ 
+ ```bash
+ sudo nano /etc/nginx/nginx.conf
+ user www-data;
+ worker_processes 4;
+ pid /run/nginx.pid; 
+ 
+ events {
+     worker_connections 768;
+ } 
+ 
+ http {
+     sendfile on;
+     tcp_nopush on;
+     tcp_nodelay on;
+     keepalive_timeout 65;
+     types_hash_max_size 2048; 
+ 
+     include /etc/nginx/mime.types;
+     default_type application/octet-stream; 
+ 
+     access_log /var/log/nginx/access.log;
+     error_log /var/log/nginx/error.log;
+ 
+     gzip on;
+     gzip_disable "msie6";
+ 
+     include /etc/nginx/conf.d/*.conf;
+ #   include /etc/nginx/sites-enabled/*
+ 
+     server {
+         listen 8080;
+         location / { 
+                 root /data/www;
+         }
+     }
+ }
+ ```
+
+ - zaladowanie nowej konfiguracji `nginx`
+ 
+ ```
+ sudo nginx -s reload
+ ```
+ - sprawdzenie adresow `http://<server-IP>:8080/safe/index.html` oraz `http://<server-IP>:8080/unsafe/index.html`
+
+ - utworzenie profilu dla `nginx`
+ 
+ ```bash
+ cd /etc/apparmor.d/
+ sudo aa-autodep nginx
+ ```
+
+ - przelaczenie `AppArmor` w tryb `complain` i restart `nginx`
+
+ ```bash
+ sudo aa-complain nginx
+ sudo service nginx restart
+ ```
+ 
+ - sprawdzenie adresu `http://<server-IP>:8080/safe/index.html`
+
+ - utworzenie podstawowego profilu na podstawie `/var/log/nginx`
+ 
+ ```bash
+ sudo aa-logprof
+ ```
+ 
+ - edycja profilu `nginx`
+ 
+  - dodanie `#include <abstractions/apache2-common>`
+  - dodanie `capability setgid`
+  - dodanie `capability setuid`
+  - dodanie znaku `*` do `/data/www/safe/`
+  - dodanie lini `deny /data/www/unsafe/* r,`
+  - dodanie znaku `w` do `/var/log/nginx/error.log`
+ 
+ ```bash
+ sudo nano /etc/apparmor.d/usr.sbin.nginx
+ #include <tunables/global>
+
+ /usr/sbin/nginx {
+   #include <abstractions/apache2-common>
+   #include <abstractions/base>
+   #include <abstractions/nis>
+ 
+   capability dac_override,
+   capability dac_read_search,
+   capability net_bind_service,
+   capability setgid,
+   capability setuid,
+ 
+   /data/www/safe/* r,
+   deny /data/www/unsafe/* r,
+   /etc/group r,
+   /etc/nginx/conf.d/ r,
+   /etc/nginx/mime.types r,
+   /etc/nginx/nginx.conf r,
+   /etc/nsswitch.conf r,
+   /etc/passwd r,
+   /etc/ssl/openssl.cnf r,
+   /run/nginx.pid rw,
+   /usr/sbin/nginx mr,
+   /var/log/nginx/access.log w,
+   /var/log/nginx/error.log w,
+ } 
+ ```
+ 
+ - przelaczenie `AppArmor` w tryb `enforce`
+ ```bash
+ sudo aa-enforce nginx
+ ```
+ 
+ - przeladowanie `AppArmor` i restart `nginx`
+ 
+ ```bash
+ sudo /etc/init.d/apparmor reload
+ sudo service nginx restart
+ ```
+ 
+ - sprawdzenie statusu `AppArmor`
+ 
+ ```bash
+ sudo apparmor_status
+ ```
+ 
+ - sprawdzenie adresow `http://<server-IP>:8080/safe/index.html` oraz `http://<server-IP>:8080/unsafe/index.html`
+ 
 ---
 **2016.11.23**
 
