@@ -10,14 +10,14 @@
 ```bash
 man sudoers
 sudo visudo
-root ALL=(ALL) ALL
-unixman ALL=(ALL) ALL
+root ALL=(ALL:ALL) ALL
 %admin ALL=(ALL) ALL
-unixman2 ubuntu = (root, unixman) /bin/ls, /bin/kill
+%sudo ALL=(ALL:ALL) ALL
+unixman2 ubuntu = (root) /bin/ls, /bin/kill, /bin/cat
 ```
 
 ```bash
-sudo -u unixman /bin/ls /etc
+sudo [-u root] /bin/cat /etc/sudoers
 ```
 
 - zapory sieciowe (firewall)
