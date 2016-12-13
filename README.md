@@ -2,6 +2,67 @@
 [1] Hertzog&Mas, [The Debian Administrator's Handbook](https://debian-handbook.info/browse/stable/)
 
 
+
+---
+**2016.12.14**
+
+- zasada dzialania zapory sieciowej `iptables`, cele, reguly, lancuchy, domyslne zasady
+
+- Reguły `iptables` sa ustalane i edytowane z wiersza polecenia komendą `iptables` dla `IPv4` i `ip6tables` dla `IPv6`
+
+- zapis i ladowanie regul
+
+```bash
+sudo iptables-save > /etc/iptables/rules.v4
+sudo iptables-restore < /etc/iptables/rules.v4
+sudo ip6tables-save > /etc/iptables/rules.v6
+sudo ip6tables-restore < /etc/iptables/rules.v6
+```
+
+- automatyczne ladowanie regul `iptables`
+
+```bash
+sudo apt-get install iptables-persistent
+```
+
+- lista regul
+
+```bash
+sudo iptables -L
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination
+```
+
+```bash
+sudo iptables -S
+-P INPUT ACCEPT
+-P FORWARD ACCEPT
+-P OUTPUT ACCEPT
+```
+
+- resetowanie regul do ustawien domyslnych
+
+```bash
+sudo iptables -F
+```
+
+- dodanie najprostszej reguly
+
+```bash
+sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+```
+ - `-A INPUT`: dodanie reguly na koniec lancucha `INPUT`
+ - `-m conntrack`: uzycie modulu `conntrack`
+ - `--ctstate ESTABLISHED,RELATED`: opcja modulu `conntrack` filtrujaca pakiety, ktore naleza do istniejacego juz polaczenia (`ESTABLISHED`), badz do prawidlowo nawiazanego polaczenia (`RELATED`)
+ - `-j ACCEPT`: specyfikacja celu `ACCEPT`, pakiety spelniajace kryteria sa akceptowane i przekazywane dalej 
+ 
+
 ---
 **2016.12.07**
 
