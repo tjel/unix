@@ -166,14 +166,14 @@ sudo iptables -P INPUT DROP
 
 ```bash 
 sudo service iptables-persistent save 
-sudo service iptables-persistent reload
+sudo dpkg-reconfigure iptables-persistent
 ``` 
  
 - aktualizacja i przeladowanie konfiguracji `iptables` (Ubuntu Server 16.04)
 
 ```bash
 sudo service netfilter-persistent save
-sudo service netfilter-persistent reload
+sudo dpkg-reconfigure iptables-persistent
 ```
 
 - plik konfiguracyjny `iptables`
