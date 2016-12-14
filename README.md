@@ -123,7 +123,7 @@ sudo iptables -S
 - zmiana domyslnej reguly (metoda 1)
 
 ```bash
-sudo iptables -P INPUT -j DROP
+sudo iptables -P INPUT DROP
 ```
 
 - zmiana domyslnej reguly (metoda 2)
