@@ -210,6 +210,31 @@ sudo iptables -D INPUT 3
 sudo iptables -F INPUT
 ```
 
+- pomijanie nieprawidlowych pakietow
+
+```bash
+sudo iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
+```
+
+- blokowanie adresu IP
+
+```bash
+sudo iptables -A INPUT -s 15.15.15.51 -j DROP
+sudo iptables -A INPUT -s 15.15.15.51 -j REJECT
+```
+
+- blokowanie polaczenia z konkretnego adresu IP do interfejsu `eth0`
+
+```bash
+sudo iptables -A INPUT -i eth0 -s 15.15.15.51 -j DROP
+```
+
+- zezwalanie na polaczenie SSH z sieci `15.15.15.0/24`
+
+```bash
+sudo iptables -A INPUT -p tcp -s 15.15.15.0/24 --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+```
+
 
 ---
 **2016.12.07**
