@@ -6,9 +6,11 @@
 ---
 **2016.12.14**
 
-- zasada dzialania zapory sieciowej `iptables`, cele, reguly, lancuchy, domyslne zasady
+- zasada dzialania zapory sieciowej `iptables`, tablice, lancuchy, reguly, wzorce i dzialania/cele 
 
-- Reguły `iptables` sa ustalane i edytowane z wiersza polecenia komendą `iptables` dla `IPv4` i `ip6tables` dla `IPv6`
+- domyslne ustawienia zapory
+
+- `iptables` dla `IPv4`, `ip6tables` dla `IPv6`
 
 - zapis i ladowanie regul
 
@@ -190,6 +192,24 @@ sudo cat /etc/iptables/rules.v4
 COMMIT
 # Completed on Wed Dec 14 00:41:27 2016
 ```
+
+- spradzenie poprawnosci skladni pliku konfiguracyjnego
+
+```bash
+sudo iptables-restore -t /etc/iptables/rules.v4
+```
+
+- usuwanie regul
+
+```bash
+sudo iptables -L --line-numbers
+sudo iptables -D INPUT 3
+```
+
+```bash
+sudo iptables -F INPUT
+```
+
 
 ---
 **2016.12.07**
