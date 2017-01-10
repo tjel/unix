@@ -5,7 +5,7 @@
 ---
 **2017.01.11**
 
-- lokalne narzedzia monitorowania serwera: smartmontools, sysstat
+- lokalne narzedzia monitorowania serwera: smartmontools, sysstat, sar
 
  - smartmontools
 
@@ -24,9 +24,14 @@
  sudo dpkg-reconfigure sysstat
  cat /var/log/sysstat
  cat /etc/cron.d/sysstat
- 
  ```
-
+ 
+ - sar
+ 
+ ```bash
+ sar [-r|-b|-A|-s <START> -e <END>|-f <PATH-TO-SAR-FILE>]
+ sar -f /var/log/sysstat/sa06
+ ```
 
 ---
 **2016.12.21**
