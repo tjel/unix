@@ -2,6 +2,36 @@
 [1] Hertzog&Mas, [The Debian Administrator's Handbook](https://debian-handbook.info/browse/stable/)
 
 
+---
+**2017.01.11**
+
+- lokalne narzedzia monitorowania serwera: smartmontools, sysstat
+
+ - smartmontools
+
+```bash
+sudo apt-get install smartmontools
+cat /etc/default/smartmontools
+...
+start_smart=yes
+...
+cat /etc/smartmontools/run.d/10mail
+```
+- sysstat
+
+```bash
+sudo apt-get install sysstat
+sudo dpkg-reconfigure sysstat
+cat /var/log/sysstat
+cat /etc/cron.d/sysstat
+
+```
+
+
+---
+**2016.12.21**
+
+- kolokwium
 
 ---
 **2016.12.14**
