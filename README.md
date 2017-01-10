@@ -60,9 +60,9 @@ sudo /etc/init.d/ganglia-monitor restart
 sudo tcpdump dst host 239.2.11.71
 ```
  
- - serwer Ganglia
- 
- ```bash
+- serwer Ganglia
+
+```bash
 sudo apt-get install gmetad ganglia-webfrontend
 cat /etc/ganglia/gmetad.conf
 ...
@@ -87,6 +87,8 @@ ls /var/lib/ganglia/rrds/
 sudo ln -s /etc/ganglia-webfrontend/apache.conf /etc/apache2/sites-available/ganglia
 sudo a2ensite ganglia
 ```
+
+
 
 ---
 **2016.12.21**
