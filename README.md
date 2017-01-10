@@ -22,7 +22,7 @@
  ```bash
  sudo apt-get install sysstat
  sudo dpkg-reconfigure sysstat
- cat /var/log/sysstat
+ ls /var/log/sysstat
  cat /etc/cron.d/sysstat
  ```
  
@@ -32,6 +32,54 @@
  sar [-r|-b|-A|-s <START> -e <END>|-f <PATH-TO-SAR-FILE>]
  sar -f /var/log/sysstat/sa06
  ```
+
+- klient Ganglia
+
+```bash
+sudo apt-get install ganglia-monitor
+cat /etc/ganglia/gmond.conf
+...
+cluster {
+ name = "cluster01"
+ owner = "unspecified"
+ latlong = "unspecified"
+ url = "unspecified"
+}
+...
+udp_send_channel {
+ mcast_join = 239.2.11.71
+ port = 8649
+ ttl = 1
+}
+...
+```
+```bash
+sudo /etc/init.d/ganglia-monitor restart
+```
+```bash
+sudo tcpdump dst host 239.2.11.71
+```
+ 
+ - serwer Ganglia
+ 
+ ```bash
+sudo apt-get install gmetad
+cat /etc/ganglia/gmetad.conf
+...
+data_source "cluster01" localhost
+data_source "cluster02" <IP1:port> <IP2:port> <IP3:port> ...
+... 
+gridname "grid01"
+```
+
+```bash
+sudo /etc/init.d/gmetad restart
+```
+
+```bash
+ls /var/lib/ganglia/rrds/
+```
+
 
 ---
 **2016.12.21**
