@@ -63,13 +63,16 @@ sudo tcpdump dst host 239.2.11.71
  - serwer Ganglia
  
  ```bash
-sudo apt-get install gmetad
+sudo apt-get install gmetad ganglia-webfrontend
 cat /etc/ganglia/gmetad.conf
 ...
 data_source "cluster01" localhost
-data_source "cluster02" <IP1:port> <IP2:port> <IP3:port> ...
+data_source "cluster02" <node-1-IP:port> <node2-IP:port>
 ... 
 gridname "grid01"
+...
+authority "http://<ganglia-server-IP>/ganglia/"
+...
 ```
 
 ```bash
@@ -80,6 +83,10 @@ sudo /etc/init.d/gmetad restart
 ls /var/lib/ganglia/rrds/
 ```
 
+```bash
+sudo ln -s /etc/ganglia-webfrontend/apache.conf /etc/apache2/sites-available/ganglia
+sudo a2ensite ganglia
+```
 
 ---
 **2016.12.21**
