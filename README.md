@@ -20,6 +20,8 @@
  
  https://help.ubuntu.com/community/Smartmontools
  
+ https://www.thomas-krenn.com/en/wiki/SMART_tests_with_smartctl
+ 
  
  - sysstat
  
