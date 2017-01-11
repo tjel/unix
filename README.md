@@ -13,7 +13,7 @@
  sudo apt-get install smartmontools
  cat /etc/default/smartmontools
  ...
- start_smart=yes
+ start_smartd=yes
  ...
  cat /etc/smartmontools/run.d/10mail
  ```
