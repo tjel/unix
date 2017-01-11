@@ -17,6 +17,10 @@
  ...
  cat /etc/smartmontools/run.d/10mail
  ```
+ 
+ https://help.ubuntu.com/community/Smartmontools
+ 
+ 
  - sysstat
  
  ```bash
