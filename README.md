@@ -90,8 +90,7 @@ ls /var/lib/ganglia/rrds/
 ```
 
 ```bash
-sudo ln -s /etc/ganglia-webfrontend/apache.conf /etc/apache2/sites-available/ganglia
-sudo a2ensite ganglia
+sudo cp /etc/ganglia-webfrontend/apache.conf /etc/apache2/sites-enabled/ganglia.conf
 ```
 
 
