@@ -11,14 +11,65 @@
  - instalacja, uruchamianie i zatrzymywanie demona `backuppc`
  
  ```bash
-apt-get install backuppc
-sudo service backuppc [start|stop]
+ apt-get install backuppc
+ sudo service backuppc [start|stop]
  ```
  
- - web-frontend `http://<BackupPC-server-IP>/backuppc`, uzytkownik: `backuppc`
+ - web-frontend 
+
+ ```bash
+ http://<BackupPC-server-IP>/backuppc 
+ uzytkownik: backuppc
+ ```
  
+ - katalog kopii zapasowych 
  
- - katalog kopii zapasowych `/var/lib/backuppc/`
+ ```bash
+ ls /var/lib/backuppc/
+ ```
+ 
+ - konfiguracja domyslna serwera BackupPC 
+ 
+ ```bash
+ cat /etc/backuppc/config.pl
+ ```
+
+ - konfiguracja serwera BackupPC o nazwie `ubuntu` 
+
+ ```bash
+ cat /etc/backuppc/ubuntu.pl
+ ```
+
+- konfiguracja serwera za pomoca przegladarki internetowej
+
+- konfiguracja serwera z poziomu powloki
+
+```bash
+cat  /etc/backuppc/config.pl
+...
+$Conf{XferMethod} = 'rsync';
+...
+$Conf{RSyncClientCmd} = '$sshPath -q -x -l backuppc $host sudo $rsyncPath $argList+';
+...
+$Conf{RSyncClientRestoreCmd} = '$sshPath -q -x -l backuppc $host sudo $rsyncPath $argList+'
+...
+```
+
+ - konfiguracja kluczy ssh
+ 
+ ```bash
+ sudo -u backuppc ssh-keygen -t rsa
+ cat /var/lib/backuppc/.ssh
+ ```
+
+ - konfiguracja klienta BackupPC 
+
+ ```bash
+ sudo adduser backuppc --disabled-password
+ sudo mkdir /home/backuppc/.ssh
+ sudo chown backuppc /home/backuppc/.ssh
+ ```
+ 
 
 - Bacula
 
