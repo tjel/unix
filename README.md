@@ -8,6 +8,18 @@
 
 - BackupPC
 
+ - instalacja, uruchamianie i zatrzymywanie demona `backuppc`
+ 
+ ```bash
+apt-get install backuppc
+sudo service backuppc [start|stop]
+ ```
+ 
+ - web-frontend `http://<BackupPC-server-IP>/backuppc`, uzytkownik: `backuppc`
+ 
+ 
+ - katalog kopii zapasowych `/var/lib/backuppc/`
+
 - Bacula
 
 ---
