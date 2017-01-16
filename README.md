@@ -1,6 +1,14 @@
 # UNIX
 [1] Hertzog&Mas, [The Debian Administrator's Handbook](https://debian-handbook.info/browse/stable/)
 
+---
+**2017.01.18**
+
+- rsync
+
+- BackupPC
+
+- Bacula
 
 ---
 **2017.01.11**
