@@ -142,9 +142,9 @@
  ...
  ```
  
- - zmiana harmonogramu tworzenia kopii zapasowej
+- zmiana harmonogramu tworzenia kopii zapasowej
  
- - przywracanie plikow
+- przywracanie plikow
  
 - rsync & cron
 
