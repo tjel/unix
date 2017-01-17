@@ -33,17 +33,17 @@
  ```bash
  cat /etc/backuppc/config.pl
  ```
-
+ 
  - konfiguracja serwera o nazwie `ubuntu` 
-
+ 
  ```bash
  cat /etc/backuppc/ubuntu.pl
  ```
-
-- konfiguracja serwera za pomoca przegladarki internetowej
-
-- konfiguracja serwera z poziomu powloki
-
+ 
+ - konfiguracja serwera za pomoca przegladarki internetowej
+ 
+ - konfiguracja serwera z poziomu powloki
+ 
  ```bash
  cat  /etc/backuppc/config.pl
  ...
@@ -54,7 +54,7 @@
  $Conf{RSyncClientRestoreCmd} = '$sshPath -q -x -l backuppc $host sudo $rsyncPath $argList+'
  ...
  ```
-
+ 
  - konfiguracja kluczy ssh
  
  ```bash
