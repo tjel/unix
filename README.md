@@ -50,7 +50,7 @@
  cat /etc/backuppc/ubuntu.pl
  ```
  
- - konfiguracja serwera za pomoca przegladarki internetowej; edycja `Xfer`, zapisanie zmian za pomoca `Save`, przeladowanie plikow konfiguracyjnych za pomoca `Reload` w `AdminOptions`
+ - konfiguracja serwera za pomoca przegladarki internetowej; edycja `Edit Config > Xfer`, zapisanie zmian za pomoca `Save`, przeladowanie plikow konfiguracyjnych za pomoca `Reload` w `AdminOptions`
   
  - konfiguracja serwera z poziomu powloki
  
