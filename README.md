@@ -44,16 +44,16 @@
 
 - konfiguracja serwera z poziomu powloki
 
-```bash
-cat  /etc/backuppc/config.pl
-...
-$Conf{XferMethod} = 'rsync';
-...
-$Conf{RSyncClientCmd} = '$sshPath -q -x -l backuppc $host sudo $rsyncPath $argList+';
-...
-$Conf{RSyncClientRestoreCmd} = '$sshPath -q -x -l backuppc $host sudo $rsyncPath $argList+'
-...
-```
+ ```bash
+ cat  /etc/backuppc/config.pl
+ ...
+ $Conf{XferMethod} = 'rsync';
+ ...
+ $Conf{RSyncClientCmd} = '$sshPath -q -x -l backuppc $host sudo $rsyncPath $argList+';
+ ...
+ $Conf{RSyncClientRestoreCmd} = '$sshPath -q -x -l backuppc $host sudo $rsyncPath $argList+'
+ ...
+ ```
 
  - konfiguracja kluczy ssh
  
