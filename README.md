@@ -22,7 +22,8 @@
  - web-frontend 
 
  ```bash
- http://<BackupPC-server-IP>/backuppc 
+ http://<BackupPC-server-IP>/backuppc
+ http://<BackupPC-server-IP>/backuppc/index.cgi 
  uzytkownik: backuppc
  ```
  
