@@ -6,7 +6,7 @@
 
 - rsync
 
-- BackupPC
+- serwer BackupPC
 
  - instalacja, uruchamianie i zatrzymywanie demona `backuppc`
  
@@ -28,13 +28,13 @@
  ls /var/lib/backuppc/
  ```
  
- - konfiguracja domyslna serwera BackupPC 
+ - konfiguracja domyslna serwera
  
  ```bash
  cat /etc/backuppc/config.pl
  ```
 
- - konfiguracja serwera BackupPC o nazwie `ubuntu` 
+ - konfiguracja serwera o nazwie `ubuntu` 
 
  ```bash
  cat /etc/backuppc/ubuntu.pl
@@ -62,7 +62,7 @@ $Conf{RSyncClientRestoreCmd} = '$sshPath -q -x -l backuppc $host sudo $rsyncPath
  cat /var/lib/backuppc/.ssh
  ```
 
- - konfiguracja klienta BackupPC 
+- klient BackupPC 
 
  ```bash
  sudo adduser backuppc --disabled-password
