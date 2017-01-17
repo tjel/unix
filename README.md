@@ -38,8 +38,8 @@
  cat /etc/backuppc/ubuntu.pl
  ```
  
- - konfiguracja serwera za pomoca przegladarki internetowej
- 
+ - konfiguracja serwera za pomoca przegladarki internetowej; edycja `Xfer`, zapisanie zmian za pomoca `Save`, przeladowanie plikow konfiguracyjnych za pomoca `Reload` w `AdminOptions`
+  
  - konfiguracja serwera z poziomu powloki
  
  ```bash
@@ -47,9 +47,9 @@
  ...
  $Conf{XferMethod} = 'rsync';
  ...
- $Conf{RSyncClientCmd} = '$sshPath -q -x -l backuppc $host sudo $rsyncPath $argList+';
+ $Conf{RsyncClientCmd} = '$sshPath -q -x -l backuppc $host sudo $rsyncPath $argList+';
  ...
- $Conf{RSyncClientRestoreCmd} = '$sshPath -q -x -l backuppc $host sudo $rsyncPath $argList+'
+ $Conf{RsyncClientRestoreCmd} = '$sshPath -q -x -l backuppc $host sudo $rsyncPath $argList+'
  ...
  ```
  
@@ -60,13 +60,91 @@
  cat /var/lib/backuppc/.ssh
  ```
 
-- klient BackupPC 
+ - dodanie obslugi klienta poprzez przegladarke internetowa `Edit Config > Hosts > Add`, przeladowanie plikow konfiguracyjnych
+ 
+ - dodanie obslugi klienta z poziomu powloki
+ 
+ ```bash
+ cat /etc/backuppc/hosts
+ ...
+ <host-name> 0 backuppc
+ ...
+ sudo service backuppc reload
+ ```
 
+
+- klient BackupPC 
+ 
+ - dodanie uzytkownika `backuppc`
+ 
  ```bash
  sudo adduser backuppc --disabled-password
  sudo mkdir /home/backuppc/.ssh
  sudo chown backuppc /home/backuppc/.ssh
  ```
+ 
+ - skopiowanie klucza z serwera do klienta
+ 
+ ```bash
+ sudo scp /var/lib/backuppc/.ssh/id_rsa.pub <user>@<client-IP>:/tmp/
+ sudo sh -c "cat /tmp/id_rsa.pub >> /home/backuppc/.ssh/authorized_keys"
+ ```
+ 
+ - zalogowanie do klienta z poziomu serwera + konfiguracja sudo
+ 
+ ```bash
+ sudo -u backuppc ssh <client-IP>
+ sudo visudo
+ ...
+ backuppc ALL=(root) NOPASSWD:/usr/bin/rsync
+ ...
+ 
+ ```
+
+- optymalicacja BackupPC
+
+ - checksum-seed
+ 
+ ```bash
+ cat /etc/backuppc/config.pl
+ ...
+ $Conf{RsyncArgs}
+ ...
+ '--checksum-seed=32761',
+ ...
+  $Conf{RsyncRestoreArgs}
+ ...
+ '--checksum-seed=32761',
+ ...
+ ```
+
+ - one-file-system 
+ 
+  ```bash
+ cat /etc/backuppc/config.pl
+ ...
+ $Conf{RsyncArgs}
+ ...
+ '--one-file-system',
+ ...
+  $Conf{RsyncRestoreArgs}
+ ...
+ '--one-file-system',
+ ...
+ $Conf{RsyncShareName} = ['/home', '/var'];
+ ```
+ 
+ - wykluczenie katalogow z synchronizacji
+ 
+ ```bash
+ ...
+ $Conf{BackupFilesExclude} = ['/var/tmp', '/var/spool/mail'];
+ ...
+ ```
+ 
+ - zmiana harmonogramu tworzenia kopii zapasowej
+ 
+ - przywracanie plikow
  
 - rsync & cron
 
