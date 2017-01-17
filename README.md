@@ -11,7 +11,7 @@
  - instalacja, uruchamianie i zatrzymywanie demona `backuppc`
  
  ```bash
- apt-get install backuppc
+ sudo apt-get install backuppc
  sudo service backuppc [start|stop]
  ```
  
