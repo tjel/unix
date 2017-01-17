@@ -69,7 +69,7 @@
  
  ```bash
  sudo -u backuppc ssh-keygen -t rsa
- cat /var/lib/backuppc/.ssh
+ sudo cat /var/lib/backuppc/.ssh
  ```
 
  - dodanie obslugi klienta poprzez przegladarke internetowa `Edit Config > Hosts > Add`, przeladowanie plikow konfiguracyjnych
