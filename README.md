@@ -13,11 +13,23 @@
  sudo service backuppc [start|stop]
  ```
  
+ - zmiana hasla dostepu do web-frontendu
+ 
+ ```bash
+ htpasswd /etc/backuppc/htpasswd backuppc
+ ```
+ 
  - web-frontend 
 
  ```bash
  http://<BackupPC-server-IP>/backuppc 
  uzytkownik: backuppc
+ ```
+ 
+ - konfiguracja serwera Apache
+ 
+ ```bash
+ /etc/apache2/conf-available/backuppc.conf -> /etc/backuppc/apache.conf
  ```
  
  - katalog kopii zapasowych 
