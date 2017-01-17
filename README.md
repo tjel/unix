@@ -155,14 +155,17 @@
  ...
  ```
  
+ - ograniczenie puli archiwizowanych katalogow
+ 
+ ```bash
+ cat /etc/backuppc/<client-IP>.pl
+ $Conf{BackupFilesOnly} = '/home';
+ ```
+ 
 - zmiana harmonogramu tworzenia kopii zapasowej
  
 - przywracanie plikow
  
-- rsync & cron
-
-- Bacula
-
 ---
 **2017.01.11**
 
