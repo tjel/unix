@@ -4,8 +4,6 @@
 ---
 **2017.01.18**
 
-- rsync
-
 - serwer BackupPC
 
  - instalacja, uruchamianie i zatrzymywanie demona `backuppc`
@@ -70,6 +68,7 @@
  sudo chown backuppc /home/backuppc/.ssh
  ```
  
+- rsync & cron
 
 - Bacula
 
