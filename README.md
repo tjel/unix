@@ -1,7 +1,268 @@
 # UNIX
 [1] Hertzog&Mas, [The Debian Administrator's Handbook](https://debian-handbook.info/browse/stable/)
 
+---
+**2017.01.18**
 
+- serwer BackupPC
+
+ - instalacja, uruchamianie i zatrzymywanie demona `backuppc`
+ 
+ ```bash
+ sudo apt-get install backuppc
+ sudo service backuppc [start|stop]
+ ```
+ 
+ - zmiana hasla dostepu do web-frontendu
+ 
+ ```bash
+ htpasswd /etc/backuppc/htpasswd backuppc
+ ```
+ 
+ - web-frontend 
+
+ ```bash
+ http://<BackupPC-server-IP>/backuppc
+ http://<BackupPC-server-IP>/backuppc/index.cgi 
+ uzytkownik: backuppc
+ ```
+ 
+ - konfiguracja serwera Apache
+ 
+ ```bash
+ /etc/apache2/conf-available/backuppc.conf -> /etc/backuppc/apache.conf
+ ```
+ 
+ - katalog kopii zapasowych 
+ 
+ ```bash
+ ls /var/lib/backuppc/
+ ```
+ 
+ - konfiguracja domyslna serwera
+ 
+ ```bash
+ cat /etc/backuppc/config.pl
+ ```
+ 
+ - konfiguracja serwera o nazwie `ubuntu` 
+ 
+ ```bash
+ cat /etc/backuppc/ubuntu.pl
+ ```
+ 
+ - konfiguracja serwera za pomoca przegladarki internetowej; edycja `Edit Config > Xfer`, zapisanie zmian za pomoca `Save`, przeladowanie plikow konfiguracyjnych za pomoca `Reload` w `AdminOptions`
+  
+ - konfiguracja serwera z poziomu powloki
+ 
+ ```bash
+ cat  /etc/backuppc/config.pl
+ ...
+ $Conf{XferMethod} = 'rsync';
+ ...
+ $Conf{RsyncClientCmd} = '$sshPath -q -x -l backuppc $host sudo $rsyncPath $argList+';
+ ...
+ $Conf{RsyncClientRestoreCmd} = '$sshPath -q -x -l backuppc $host sudo $rsyncPath $argList+'
+ ...
+ ```
+ 
+ - konfiguracja kluczy ssh
+ 
+ ```bash
+ sudo -u backuppc ssh-keygen -t rsa
+ sudo cat /var/lib/backuppc/.ssh
+ ```
+
+ - dodanie obslugi klienta poprzez przegladarke internetowa `Edit Config > Hosts > Add`, przeladowanie plikow konfiguracyjnych
+ 
+ - dodanie obslugi klienta z poziomu powloki
+ 
+ ```bash
+ cat /etc/backuppc/hosts
+ ...
+ <host-name> 0 backuppc
+ ...
+ sudo service backuppc reload
+ ```
+
+
+- klient BackupPC 
+ 
+ - dodanie uzytkownika `backuppc`
+ 
+ ```bash
+ sudo adduser backuppc --disabled-password
+ sudo mkdir /home/backuppc/.ssh
+ sudo chown backuppc /home/backuppc/.ssh
+ ```
+ 
+ - skopiowanie klucza z serwera do klienta
+ 
+ ```bash
+ sudo scp /var/lib/backuppc/.ssh/id_rsa.pub <user>@<client-IP>:/tmp/
+ sudo sh -c "cat /tmp/id_rsa.pub >> /home/backuppc/.ssh/authorized_keys"
+ ```
+ 
+ - zalogowanie do klienta z poziomu serwera + konfiguracja sudo
+ 
+ ```bash
+ sudo -u backuppc ssh <client-IP>
+ sudo visudo
+ ...
+ backuppc ALL=(root) NOPASSWD:/usr/bin/rsync
+ ...
+ 
+ ```
+
+- optymalicacja BackupPC
+
+ - checksum-seed
+ 
+ ```bash
+ cat /etc/backuppc/config.pl
+ ...
+ $Conf{RsyncArgs}
+ ...
+ '--checksum-seed=32761',
+ ...
+  $Conf{RsyncRestoreArgs}
+ ...
+ '--checksum-seed=32761',
+ ...
+ ```
+
+ - one-file-system 
+ 
+  ```bash
+ cat /etc/backuppc/config.pl
+ ...
+ $Conf{RsyncArgs}
+ ...
+ '--one-file-system',
+ ...
+  $Conf{RsyncRestoreArgs}
+ ...
+ '--one-file-system',
+ ...
+ $Conf{RsyncShareName} = ['/home', '/var'];
+ ```
+ 
+ - wykluczenie katalogow z synchronizacji
+ 
+ ```bash
+ ...
+ $Conf{BackupFilesExclude} = ['/var/tmp', '/var/spool/mail'];
+ ...
+ ```
+ 
+ - ograniczenie puli archiwizowanych katalogow
+ 
+ ```bash
+ cat /etc/backuppc/<client-IP>.pl
+ $Conf{BackupFilesOnly} = '/home';
+ ```
+ 
+- zmiana harmonogramu tworzenia kopii zapasowej
+ 
+- przywracanie plikow
+ 
+---
+**2017.01.11**
+
+- lokalne narzedzia monitorowania serwera: smartmontools, sysstat, sar
+
+ - smartmontools
+
+ ```bash
+ sudo apt-get install smartmontools
+ cat /etc/default/smartmontools
+ ...
+ start_smartd=yes
+ ...
+ cat /etc/smartmontools/run.d/10mail
+ ```
+ 
+ https://help.ubuntu.com/community/Smartmontools
+ 
+ https://www.thomas-krenn.com/en/wiki/SMART_tests_with_smartctl
+ 
+ 
+ - sysstat
+ 
+ ```bash
+ sudo apt-get install sysstat
+ sudo dpkg-reconfigure sysstat
+ ls /var/log/sysstat
+ cat /etc/cron.d/sysstat
+ ```
+ 
+ - sar
+ 
+ ```bash
+ sar [-r|-b|-A|-s <START> -e <END>|-f <PATH-TO-SAR-FILE>]
+ sar -f /var/log/sysstat/sa06
+ ```
+
+- klient Ganglia
+
+```bash
+sudo apt-get install ganglia-monitor
+cat /etc/ganglia/gmond.conf
+...
+cluster {
+ name = "cluster01"
+ owner = "unspecified"
+ latlong = "unspecified"
+ url = "unspecified"
+}
+...
+udp_send_channel {
+ mcast_join = 239.2.11.71
+ port = 8649
+ ttl = 1
+}
+...
+```
+```bash
+sudo /etc/init.d/ganglia-monitor restart
+```
+```bash
+sudo tcpdump dst host 239.2.11.71
+```
+ 
+- serwer Ganglia
+
+```bash
+sudo apt-get install gmetad ganglia-webfrontend
+cat /etc/ganglia/gmetad.conf
+...
+data_source "cluster01" localhost
+data_source "cluster02" <node-1-IP:port> <node2-IP:port>
+... 
+gridname "grid01"
+...
+authority "http://<ganglia-server-IP>/ganglia/"
+...
+```
+
+```bash
+sudo /etc/init.d/gmetad restart
+```
+
+```bash
+ls /var/lib/ganglia/rrds/
+```
+
+```bash
+sudo cp /etc/ganglia-webfrontend/apache.conf /etc/apache2/sites-enabled/ganglia.conf
+```
+
+
+
+---
+**2016.12.21**
+
+- kolokwium
 
 ---
 **2016.12.14**
