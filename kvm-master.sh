@@ -8,9 +8,12 @@ Hypervisor="qemu:///system"
 Vcpu="1"
 Memory="512"
 
+# qemu-img create -f qcow2 -o preallocation=metadata /mnt/SSD2/vm/wotlk.qcow2
+# format=qcow2,bus=virtio,cache=none
 # DiskPath="/home/tjel/kvm/vm-images/centos7.img"
 DiskPath="/home/tjel/kvm/vm-images/$Name.img"
 DiskSize="10"
+
 
 # --cdrom
 # Cdrom="/home/tjel/images/CentOS-7-x86_64-Minimal.iso"
@@ -42,6 +45,7 @@ Graphics="none"
 # Network="--network model=virtio,bridge=br0,mac=52:54:00:00:00:00"
 
 # --extra-args works only with --location
+# ExtraArgs="hostname=test ip=10.10.10.120 dns=31.3.135.232 gateway=10.10.10.1 netmask=255.255.255.0 console=tty0 console=ttyS0,115200"
 # ExtraArgs="console=ttyS0"
 # ExtraArgs="console=ttyS0,115200n8 serial"
 ExtraArgs="console=tty0 console=ttyS0,115200"
