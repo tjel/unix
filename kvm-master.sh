@@ -32,7 +32,7 @@ Location="/home/tjel/images/ubuntu-16.04.1-server-amd64.iso"
 # Location="/home/tjel/images/CorePlus-current.iso"
 
 
-# not used here but keet for consistency
+# not used here but kept for consistency
 # --console pty,target_type=serial
 # --console pty,target_type=virtio
 
