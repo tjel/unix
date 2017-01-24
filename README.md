@@ -7,6 +7,39 @@
 
 ### Zarzadzanie infrastruktura poprzez `Ansible`
 
+- konfiguracja kluczy na serwerze `Ansible`
+
+```bash
+ssh-keygen
+ls /home/unixman/.ssh/
+id_rsa id_rsa.pub
+```
+
+- skopiowanie kluczy na hosty
+
+```bash
+ssh-copy-id unixman@192.168.55.102
+ssh-copy-id unixman@192.168.55.103
+```
+
+- wylaczenie autentyfikacji poprzez haslo na hostach
+
+```bash
+sudo nano /etc/ssh/sshd_config
+...
+PasswordAuthentication no
+...
+PubkeyAuthentication yes
+ChallengeResponseAuthentication no
+...
+```
+
+- przeladowanie demona `sshd` na hostach
+
+```bash
+sudo systemctl reload sshd
+```
+
 - instalacja `Ansible` na serwerze zarzadzajacym
  
 ```bash
@@ -42,7 +75,7 @@ host2 ansible_ssh_host=192.168.55.103
  sudo mkdir /etc/ansible/group_vars
  sudo nano /etc/ansible/group_vars/servers
  ---
- ansible_ssh_user: root
+ ansible_ssh_user: unixman
  ```
  
  - polaczenia z `host1`
