@@ -18,8 +18,8 @@ id_rsa id_rsa.pub
 - skopiowanie kluczy na hosty
 
 ```bash
-ssh-copy-id unixman@192.168.55.102
-ssh-copy-id unixman@192.168.55.103
+ssh-copy-id unixman@192.168.56.102
+ssh-copy-id unixman@192.168.56.103
 ```
 
 - wylaczenie autentyfikacji poprzez haslo na hostach
@@ -62,8 +62,8 @@ sudo nano /etc/ansible/hosts
 sudo nano /etc/ansible/hosts
 ...
 [servers]
-host1 ansible_ssh_host=192.168.55.102
-host2 ansible_ssh_host=192.168.55.103
+host1 ansible_ssh_host=192.168.56.102
+host2 ansible_ssh_host=192.168.56.103
 ...
 ```
 
