@@ -12,7 +12,7 @@
 ```bash
 ssh-keygen
 ls /home/unixman/.ssh/
-id_rsa id_rsa.pub
+id_rsa id_rsa.pub known_hosts
 ```
 
 - skopiowanie kluczy na hosty
