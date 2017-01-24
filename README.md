@@ -114,7 +114,7 @@
  
  ```
 
-- optymalicacja BackupPC
+- optymalizacja BackupPC
 
  - checksum-seed
  
