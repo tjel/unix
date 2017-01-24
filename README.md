@@ -5,7 +5,7 @@
 ---
 **2017.01.25**
 
-# zarzadzanie infrastruktura poprzez `Ansible`
+### Zarzadzanie infrastruktura poprzez `Ansible`
 
 - instalacja `Ansible` na serwerze zarzadzajacym
  
