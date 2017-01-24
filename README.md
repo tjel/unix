@@ -1,6 +1,82 @@
 # UNIX
 [1] Hertzog&Mas, [The Debian Administrator's Handbook](https://debian-handbook.info/browse/stable/)
 
+
+---
+**2017.01.25**
+
+# zarzadzanie infrastruktura poprzez `Ansible`
+
+- instalacja `Ansible` na serwerze zarzadzajacym
+ 
+```bash
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt-get update
+sudo apt-get install ansible
+```
+
+- deklaracja hostow
+
+```bash
+sudo nano /etc/ansible/hosts
+...
+[<group-name>]
+<alias> ansible_ssh_host=<ansible-host-IP>
+...
+```
+
+```bash
+sudo nano /etc/ansible/hosts
+...
+[servers]
+host1 ansible_ssh_host=192.168.55.102
+host2 ansible_ssh_host=192.168.55.103
+...
+```
+
+- konfiguracja polaczen poprzez `Ansible`
+
+ - polaczenia z grupa `servers`
+ 
+ ```bash
+ sudo mkdir /etc/ansible/group_vars
+ sudo nano /etc/ansible/group_vars/servers
+ ---
+ ansible_ssh_user: root
+ ```
+ 
+ - polaczenia z `host1`
+ 
+ ```bash
+ sudo mkdir /etc/ansible/host_vars
+ sudo nano /etc/ansible/host_vars/host1
+ ```
+
+- przyklady komend wydawanych za pomoca `Ansible`
+
+```bash
+ansible -m ping (all|servers|host1|host1:host2)
+host1 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+
+host2 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+
+```
+
+```bash
+ansible -m shell -a 'free -m' host1
+host1 | SUCCESS | rc=0 >>
+             total       used       free     shared    buffers     cached
+Mem:          3954        227       3726          0         14         93
+-/+ buffers/cache:        119       3834
+Swap:            0          0          0
+```
+
 ---
 **2017.01.18**
 
