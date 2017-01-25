@@ -116,6 +116,23 @@ Mem:          3954        227       3726          0         14         93
 Swap:            0          0          0
 ```
 
+- zarzadzanie poprzez `playbook`
+
+```bash
+sudo nano nginx.yml
+---
+- hosts: droplets
+  tasks:
+    - name: Installs nginx web server
+      apt: pkg=nginx state=installed update_cache=true
+      notify:
+        - start nginx
+
+  handlers:
+    - name: start nginx
+      service: name=nginx state=started
+```
+
 ---
 **2017.01.18**
 
