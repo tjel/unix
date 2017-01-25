@@ -7,6 +7,12 @@
 
 ### Zarzadzanie infrastruktura poprzez `Ansible`
 
+- maszyna wirtualna 
+
+```bash
+scp unixman@155.158.206.23:/home/unixman/VMs/ubuntu-bare.ova ~/VMs/
+```
+
 - konfiguracja kluczy na serwerze `Ansible`
 
 ```bash
