@@ -21,7 +21,7 @@ ls /root/.ssh/
 id_rsa id_rsa.pub known_hosts
 ```
 
-- wylaczenie logowania na konto `root` na hostach
+- wlaczenie logowania na konto `root` na hostach
 
 ```bash
 sudo passwd
@@ -46,7 +46,7 @@ sudo systemctl reload sshd
 ssh-copy-id root@192.168.56.102
 ssh-copy-id root@192.168.56.103
 ```
-- 
+- wlaczenie autoryzacji `ssh` poprzez klucz
 
 ```bash
 sudo nano /etc/ssh/sshd_config
