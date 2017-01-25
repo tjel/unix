@@ -121,7 +121,7 @@ Swap:            0          0          0
 ```bash
 sudo nano nginx.yml
 ---
-- hosts: droplets
+- hosts: servers
   tasks:
     - name: Installs nginx web server
       apt: pkg=nginx state=installed update_cache=true
@@ -131,6 +131,10 @@ sudo nano nginx.yml
   handlers:
     - name: start nginx
       service: name=nginx state=started
+```
+
+```bash
+ansible-playbook nginx.yml
 ```
 
 ---
