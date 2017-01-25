@@ -116,6 +116,8 @@ Mem:          3954        227       3726          0         14         93
 Swap:            0          0          0
 ```
 
+- przyklady uzycia modulow http://docs.ansible.com/ansible/intro_adhoc.html
+
 - zarzadzanie poprzez `playbook`
 
 ```bash
