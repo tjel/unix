@@ -93,7 +93,7 @@ host2 ansible_ssh_host=192.168.56.103
 - przyklady komend wydawanych za pomoca `Ansible`
 
 ```bash
-ansible -m ping (all|servers|host1|host1:host2)
+ansible (all|servers|host1|host1:host2) -m ping 
 host1 | SUCCESS => {
     "changed": false,
     "ping": "pong"
@@ -107,7 +107,7 @@ host2 | SUCCESS => {
 ```
 
 ```bash
-ansible -m shell -a 'free -m' host1
+ansible host1 -m shell -a 'free -m'
 host1 | SUCCESS | rc=0 >>
              total       used       free     shared    buffers     cached
 Mem:          3954        227       3726          0         14         93
