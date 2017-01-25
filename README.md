@@ -118,6 +118,8 @@ Swap:            0          0          0
 
 - przyklady uzycia modulow http://docs.ansible.com/ansible/intro_adhoc.html
 
+- lista dostepnych modulow http://docs.ansible.com/ansible/list_of_all_modules.html
+
 - zarzadzanie poprzez `playbook`
 
 ```bash
