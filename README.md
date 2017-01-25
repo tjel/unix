@@ -11,24 +11,29 @@
 
 ```bash
 ssh-keygen
-ls /home/unixman/.ssh/
+ls /root/.ssh/
 id_rsa id_rsa.pub known_hosts
 ```
 
 - skopiowanie kluczy na hosty
 
 ```bash
-ssh-copy-id unixman@192.168.56.102
-ssh-copy-id unixman@192.168.56.103
+ssh-copy-id root@192.168.56.102
+ssh-copy-id root@192.168.56.103
 ```
 
 - wylaczenie autentyfikacji poprzez haslo na hostach
 
 ```bash
+sudo passwd
+```
+
+```bash
 sudo nano /etc/ssh/sshd_config
 ...
+# PermitRootLogin without-password
+PermitRootLogin yes
 PasswordAuthentication no
-...
 PubkeyAuthentication yes
 ChallengeResponseAuthentication no
 ...
@@ -75,7 +80,7 @@ host2 ansible_ssh_host=192.168.56.103
  sudo mkdir /etc/ansible/group_vars
  sudo nano /etc/ansible/group_vars/servers
  ---
- ansible_ssh_user: unixman
+ ansible_ssh_user: root
  ```
  
  - polaczenia z `host1`
