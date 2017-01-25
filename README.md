@@ -15,13 +15,6 @@ ls /root/.ssh/
 id_rsa id_rsa.pub known_hosts
 ```
 
-- skopiowanie kluczy na hosty
-
-```bash
-ssh-copy-id root@192.168.56.102
-ssh-copy-id root@192.168.56.103
-```
-
 - wylaczenie autentyfikacji poprzez haslo na hostach
 
 ```bash
@@ -44,6 +37,14 @@ ChallengeResponseAuthentication no
 ```bash
 sudo systemctl reload sshd
 ```
+
+- skopiowanie kluczy z serwera `Ansible` na hosty
+
+```bash
+ssh-copy-id root@192.168.56.102
+ssh-copy-id root@192.168.56.103
+```
+
 
 - instalacja `Ansible` na serwerze zarzadzajacym
  
