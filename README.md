@@ -57,6 +57,9 @@ ChallengeResponseAuthentication no
 ...
 ```
 
+```bash
+sudo systemctl reload sshd
+```
 
 - instalacja `Ansible` na serwerze zarzadzajacym
  
