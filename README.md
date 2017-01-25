@@ -123,23 +123,37 @@ Swap:            0          0          0
 - zarzadzanie poprzez `playbook`
 
 ```bash
-sudo nano nginx.yml
+sudo nano apache.yml
 ---
-- hosts: servers
+- hosts: host1
   tasks:
-    - name: Installs nginx web server
-      apt: pkg=nginx state=installed update_cache=true
-      notify:
-        - start nginx
-
-  handlers:
-    - name: start nginx
-      service: name=nginx state=started
+    - name: install apache2
+      apt: name=apache2 update_cache=yes state=latest
 ```
 
 ```bash
-ansible-playbook nginx.yml
+ansible-playbook apache.yml
 ```
+
+```bash
+sudo nano apache.yml
+---
+- hosts: host1
+  tasks:
+    - name: install apache2
+      apt: name=apache2 update_cache=yes state=latest
+
+    - name: enabled mod_rewrite
+      apache2_module: name=rewrite state=present
+      notify:
+        - restart apache2
+
+  handlers:
+    - name: restart apache2
+      service: name=apache2 state=restarted
+```
+
+
 
 ---
 **2017.01.18**
