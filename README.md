@@ -21,7 +21,7 @@ ls /root/.ssh/
 id_rsa id_rsa.pub known_hosts
 ```
 
-- wylaczenie autentyfikacji poprzez haslo na hostach
+- wylaczenie logowania na konto `root` na hostach
 
 ```bash
 sudo passwd
@@ -30,11 +30,7 @@ sudo passwd
 ```bash
 sudo nano /etc/ssh/sshd_config
 ...
-# PermitRootLogin without-password
 PermitRootLogin yes
-PasswordAuthentication no
-PubkeyAuthentication yes
-ChallengeResponseAuthentication no
 ...
 ```
 
@@ -49,6 +45,16 @@ sudo systemctl reload sshd
 ```bash
 ssh-copy-id root@192.168.56.102
 ssh-copy-id root@192.168.56.103
+```
+- 
+
+```bash
+sudo nano /etc/ssh/sshd_config
+...
+PasswordAuthentication no
+PubkeyAuthentication yes
+ChallengeResponseAuthentication no
+...
 ```
 
 
